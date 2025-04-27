@@ -2,7 +2,7 @@ package com.example.pokedex.data.model
 
 import com.google.gson.annotations.SerializedName
 
-// Este modelo ahora maneja los detalles completos de un Pokémon (incluyendo la imagen oficial)
+
 data class PokemonResponse(
     @SerializedName("count") val count: Int,
     @SerializedName("next") val next: String?,
@@ -15,22 +15,30 @@ data class PokemonList(
     @SerializedName("url") val url: String
 )
 
-// Este es el modelo para manejar los detalles completos del Pokémon, incluida la imagen oficial
 data class PokemonDetails(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
-    @SerializedName("sprites") val sprites: Sprites
+    @SerializedName("sprites") val sprites: Sprites,
+    @SerializedName("types") val types: List<Type>
 )
 
 data class Sprites(
-    @SerializedName("front_default") val frontDefault: String, // Imagen estándar
+    @SerializedName("front_default") val frontDefault: String,
     @SerializedName("other") val other: OtherSprites
 )
 
 data class OtherSprites(
-    @SerializedName("official-artwork") val officialArtwork: OfficialArtwork // Arte oficial
+    @SerializedName("official-artwork") val officialArtwork: OfficialArtwork
 )
 
 data class OfficialArtwork(
-    @SerializedName("front_default") val frontDefault: String // URL del arte oficial
+    @SerializedName("front_default") val frontDefault: String
+)
+
+data class Type(
+    @SerializedName("type") val type: TypeInfo
+)
+
+data class TypeInfo(
+    @SerializedName("name") val name: String
 )
