@@ -1,37 +1,30 @@
 package com.example.pokedex.presentation.home
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.example.pokedex.presentation.home.components.ZetaCardItemHome
+import com.example.pokedex.presentation.home.components.ContentHomeScreen
+import com.example.pokedex.presentation.home.components.ZetaSearchView
 import com.example.pokedex.presentation.home.components.ZetaTopBar
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel) {
-
     Scaffold(
         topBar = {
-            ZetaTopBar(title = "Pokedex", showBackButton = false, onClickBackButton = {}, showFavoriteButton = true, onClickFavoriteButton = {} )
+            ZetaTopBar(title = "Pokedex", showBackButton = false, onClickBackButton = {}, showFavoriteButton = true, onClickFavoriteButton = {})
+        },
+        content = { paddingValues ->
+            Column(modifier = Modifier.padding(paddingValues)) {
+
+                ZetaSearchView()
+                ContentHomeScreen(viewModel)
+            }
         }
     )
-    { ContentHomeScreen(viewModel, it) }
-
 }
 
-@Composable
-fun ContentHomeScreen(viewModel: HomeViewModel, paddingValues: PaddingValues) {
-    val pokemon by viewModel.pokemon.collectAsState()
 
 
-    LazyColumn(modifier = Modifier.padding(paddingValues)) {
-        items(pokemon) { item ->
-            ZetaCardItemHome(pokemon = item) {}
-        }
-    }
-}
+
