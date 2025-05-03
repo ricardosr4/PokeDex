@@ -13,16 +13,21 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.example.pokedex.presentation.home.HomeViewModel
 
 @Composable
-fun ZetaSearchView(){
+fun ZetaSearchView(viewModel: HomeViewModel){
+
+    val homeState by viewModel.homeState.collectAsState()
 
     OutlinedTextField(
-        value = "",
-        onValueChange = {  },
+        value = homeState.query,
+        onValueChange = { viewModel.onQueryChange(it) },
         label = { Text("Buscar") },
         maxLines = 1,
         shape = RoundedCornerShape(20.dp),

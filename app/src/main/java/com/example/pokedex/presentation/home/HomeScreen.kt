@@ -18,7 +18,7 @@ fun HomeScreen(viewModel: HomeViewModel) {
         content = { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues)) {
 
-                ZetaSearchView()
+                ZetaSearchView(viewModel)
                 ContentHomeScreen(viewModel)
             }
         }
